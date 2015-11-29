@@ -1,9 +1,9 @@
 package main
 
 import (
+	"errors"
 	"github.com/Syfaro/telegram-bot-api"
 	"github.com/zhulik/margelet"
-	"errors"
 )
 
 type ConfigSession struct {
@@ -31,7 +31,6 @@ func (session ConfigSession) HandleResponse(bot margelet.MargeletAPI, message tg
 		if message.Text == "yes" {
 			bot.GetConfigRepository().Set(message.Chat.ID, "yes")
 			msg := tgbotapi.MessageConfig{Text: "Ok, i will send you a cat sometimes"}
-			msg.ReplyMarkup = tgbotapi.ForceReply{true, true}
 			msg.ChatID = message.Chat.ID
 			msg.ReplyToMessageID = message.MessageID
 			bot.Send(msg)
@@ -39,7 +38,6 @@ func (session ConfigSession) HandleResponse(bot margelet.MargeletAPI, message tg
 		} else {
 			bot.GetConfigRepository().Set(message.Chat.ID, "no")
 			msg := tgbotapi.MessageConfig{Text: "Ok, i will not send you a cat sometimes"}
-			msg.ReplyMarkup = tgbotapi.ForceReply{true, true}
 			msg.ChatID = message.Chat.ID
 			msg.ReplyToMessageID = message.MessageID
 			bot.Send(msg)

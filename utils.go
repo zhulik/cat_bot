@@ -2,11 +2,11 @@ package main
 
 import (
 	"errors"
+	"github.com/Syfaro/telegram-bot-api"
+	"github.com/zhulik/margelet"
 	"io/ioutil"
 	"net/http"
-	"github.com/zhulik/margelet"
 	"time"
-	"github.com/Syfaro/telegram-bot-api"
 )
 
 const (
@@ -45,8 +45,10 @@ func sendCat(chatID int, bot *margelet.Margelet) {
 }
 
 func randomCatSender(bot *margelet.Margelet) {
-	for _, chatID := range bot.ChatRepository.All() {
-		go sendCat(chatID, bot)
+	for {
+		for _, chatID := range bot.ChatRepository.All() {
+			go sendCat(chatID, bot)
+		}
 		time.Sleep(5 * time.Minute)
 	}
 }

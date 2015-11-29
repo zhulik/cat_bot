@@ -11,12 +11,14 @@ func main() {
 
 	margelet, err := margelet.NewMargelet("emergency_kittens", "127.0.0.1:6379", "", 3, *token, false)
 
-	margelet.AddCommandHandler("/cat", CatResponder{})
-	margelet.AddSessionHandler("/start", ConfigSession{})
-
 	if err != nil {
 		panic(err)
 	}
+
+	margelet.AddCommandHandler("/cat", CatResponder{})
+	margelet.AddSessionHandler("/start", ConfigSession{})
+
+
 
 	go randomCatSender(margelet)
 

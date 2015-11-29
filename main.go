@@ -18,5 +18,7 @@ func main() {
 		panic(err)
 	}
 
+	go randomCatSender(margelet)
+
 	margelet.Run()
 }

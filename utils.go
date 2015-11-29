@@ -4,6 +4,9 @@ import (
 	"errors"
 	"io/ioutil"
 	"net/http"
+	"github.com/zhulik/margelet"
+	"time"
+	"github.com/Syfaro/telegram-bot-api"
 )
 
 const (
@@ -27,4 +30,23 @@ func downloadFromUrl(url string) ([]byte, error) {
 
 func downloadCat() ([]byte, error) {
 	return downloadFromUrl(catURL)
+}
+
+func sendCat(chatID int, bot *margelet.Margelet) {
+	if bot.ChatConfigRepository.Get(chatID) == "yes" {
+		if bytes, err := downloadCat(); err == nil {
+
+			msg := tgbotapi.NewPhotoUpload(chatID, tgbotapi.FileBytes{"cat.jpg", bytes})
+			msg.ChatID = chatID
+
+			bot.Send(msg)
+		}
+	}
+}
+
+func randomCatSender(bot *margelet.Margelet) {
+	for _, chatID := range bot.ChatRepository.All() {
+		go sendCat(chatID, bot)
+		time.Sleep(5 * time.Minute)
+	}
 }

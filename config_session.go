@@ -9,7 +9,7 @@ import (
 type ConfigSession struct {
 }
 
-func (session ConfigSession) HandleResponse(bot margelet.MargeletAPI, message tgbotapi.Message, responses []string) (bool, error) {
+func (session ConfigSession) HandleResponse(bot margelet.MargeletAPI, message tgbotapi.Message, responses []tgbotapi.Message) (bool, error) {
 	switch len(responses) {
 	case 0:
 		msg := tgbotapi.MessageConfig{Text: "Would you like to receive a cat images sometimes? (yes/no)"}

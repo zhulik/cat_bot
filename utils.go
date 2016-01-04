@@ -2,7 +2,7 @@ package main
 
 import (
 	"errors"
-	"github.com/Syfaro/telegram-bot-api"
+	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/zhulik/margelet"
 	"io/ioutil"
 	"net/http"

@@ -6,10 +6,10 @@ import (
 	"github.com/zhulik/margelet"
 )
 
-type ConfigSession struct {
+type ConfigSessionHandler struct {
 }
 
-func (session ConfigSession) HandleResponse(bot margelet.MargeletAPI, message tgbotapi.Message, responses []tgbotapi.Message) (bool, error) {
+func (session ConfigSessionHandler) HandleSession(bot margelet.MargeletAPI, message tgbotapi.Message, responses []tgbotapi.Message) (bool, error) {
 	switch len(responses) {
 	case 0:
 		msg := tgbotapi.MessageConfig{Text: "Would you like to receive a cat images sometimes? (yes/no)"}
@@ -20,11 +20,11 @@ func (session ConfigSession) HandleResponse(bot margelet.MargeletAPI, message tg
 	}
 }
 
-func (responder ConfigSession) HelpMessage() string {
+func (responder ConfigSessionHandler) HelpMessage() string {
 	return "Configure bot"
 }
 
-func (session ConfigSession) handleResponse(bot margelet.MargeletAPI, message tgbotapi.Message) (bool, error) {
+func (session ConfigSessionHandler) handleResponse(bot margelet.MargeletAPI, message tgbotapi.Message) (bool, error) {
 	if message.Text != "yes" && message.Text != "no" {
 		msg := tgbotapi.MessageConfig{Text: "Sorry, i can't understand, type yes or no"}
 		session.forceReply(bot, message, msg)
@@ -44,12 +44,12 @@ func (session ConfigSession) handleResponse(bot margelet.MargeletAPI, message tg
 	}
 }
 
-func (session ConfigSession) forceReply(bot margelet.MargeletAPI, message tgbotapi.Message, msg tgbotapi.MessageConfig) {
+func (session ConfigSessionHandler) forceReply(bot margelet.MargeletAPI, message tgbotapi.Message, msg tgbotapi.MessageConfig) {
 	msg.ReplyMarkup = tgbotapi.ForceReply{true, true}
 	session.reply(bot, message, msg)
 }
 
-func (session ConfigSession) reply(bot margelet.MargeletAPI, message tgbotapi.Message, msg tgbotapi.MessageConfig) {
+func (session ConfigSessionHandler) reply(bot margelet.MargeletAPI, message tgbotapi.Message, msg tgbotapi.MessageConfig) {
 	msg.ChatID = message.Chat.ID
 	msg.ReplyToMessageID = message.MessageID
 	bot.Send(msg)

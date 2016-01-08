@@ -5,10 +5,10 @@ import (
 	"github.com/zhulik/margelet"
 )
 
-type CatResponder struct {
+type CatHandler struct {
 }
 
-func (responder CatResponder) Response(margelet margelet.MargeletAPI, message tgbotapi.Message) error {
+func (responder CatHandler) HandleCommand(margelet margelet.MargeletAPI, message tgbotapi.Message) error {
 	margelet.Send(tgbotapi.NewChatAction(message.Chat.ID, tgbotapi.ChatUploadPhoto))
 
 	bytes, err := downloadCat()
@@ -26,6 +26,6 @@ func (responder CatResponder) Response(margelet margelet.MargeletAPI, message tg
 	return nil
 }
 
-func (responder CatResponder) HelpMessage() string {
+func (responder CatHandler) HelpMessage() string {
 	return "Send image with cat"
 }

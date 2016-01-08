@@ -15,8 +15,8 @@ func main() {
 		panic(err)
 	}
 
-	margelet.AddCommandHandler("/cat", CatResponder{})
-	margelet.AddSessionHandler("/start", ConfigSession{})
+	margelet.AddCommandHandler("/cat", CatHandler{})
+	margelet.AddSessionHandler("/start", ConfigSessionHandler{})
 
 
 

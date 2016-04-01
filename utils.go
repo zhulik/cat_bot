@@ -2,11 +2,12 @@ package main
 
 import (
 	"errors"
-	"github.com/go-telegram-bot-api/telegram-bot-api"
-	"github.com/zhulik/margelet"
 	"io/ioutil"
 	"net/http"
 	"time"
+
+	"github.com/zhulik/margelet"
+	"gopkg.in/telegram-bot-api.v2"
 )
 
 const (

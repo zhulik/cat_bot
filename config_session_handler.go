@@ -4,7 +4,7 @@ import (
 	"errors"
 
 	"github.com/zhulik/margelet"
-	"gopkg.in/telegram-bot-api.v2"
+	"gopkg.in/telegram-bot-api.v3"
 )
 
 type ConfigSessionHandler struct {

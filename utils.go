@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/zhulik/margelet"
-	"gopkg.in/telegram-bot-api.v2"
+	"gopkg.in/telegram-bot-api.v3"
 )
 
 const (
@@ -33,7 +33,7 @@ func downloadCat() ([]byte, error) {
 	return downloadFromUrl(catURL)
 }
 
-func sendCat(chatID int, bot *margelet.Margelet) {
+func sendCat(chatID int64, bot *margelet.Margelet) {
 	if bot.ChatConfigRepository.Get(chatID) == "yes" {
 		if bytes, err := downloadCat(); err == nil {
 

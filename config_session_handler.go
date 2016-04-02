@@ -2,8 +2,9 @@ package main
 
 import (
 	"errors"
-	"github.com/go-telegram-bot-api/telegram-bot-api"
+
 	"github.com/zhulik/margelet"
+	"gopkg.in/telegram-bot-api.v3"
 )
 
 type ConfigSessionHandler struct {
@@ -53,4 +54,7 @@ func (session ConfigSessionHandler) reply(bot margelet.MargeletAPI, message tgbo
 	msg.ChatID = message.Chat.ID
 	msg.ReplyToMessageID = message.MessageID
 	bot.Send(msg)
+}
+
+func (session ConfigSessionHandler) CancelSession(bot margelet.MargeletAPI, message tgbotapi.Message, responses []tgbotapi.Message) {
 }

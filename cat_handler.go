@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/zhulik/margelet"
+	"gopkg.in/telegram-bot-api.v3"
 )
 
 type CatHandler struct {

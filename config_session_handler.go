@@ -56,5 +56,4 @@ func (session ConfigSessionHandler) reply(bot margelet.MargeletAPI, message *tgb
 }
 
 func (session ConfigSessionHandler) CancelSession(bot margelet.MargeletAPI, message *tgbotapi.Message, responses []tgbotapi.Message) {
-
 }

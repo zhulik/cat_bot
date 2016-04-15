@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/go-telegram-bot-api/telegram-bot-api"
 	"github.com/zhulik/margelet"
+	"gopkg.in/telegram-bot-api.v4"
 )
 
 type CatHandler struct {
 }
 
-func (responder CatHandler) HandleCommand(margelet margelet.MargeletAPI, message tgbotapi.Message) error {
+func (responder CatHandler) HandleCommand(margelet margelet.MargeletAPI, message *tgbotapi.Message) error {
 	margelet.Send(tgbotapi.NewChatAction(message.Chat.ID, tgbotapi.ChatUploadPhoto))
 
 	bytes, err := downloadCat()

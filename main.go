@@ -18,8 +18,6 @@ func main() {
 	margelet.AddCommandHandler("/cat", CatHandler{})
 	margelet.AddSessionHandler("/start", ConfigSessionHandler{})
 
-
-
 	go randomCatSender(margelet)
 
 	margelet.Run()

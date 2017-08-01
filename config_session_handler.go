@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"github.com/zhulik/margelet"
+	"gopkg.in/telegram-bot-api.v4"
 )
 
 type ConfigSessionHandler struct {
@@ -30,12 +31,12 @@ func (s ConfigSessionHandler) handleResponse(session margelet.Session) error {
 
 	if session.Message().Text == "yes" {
 		session.GetConfigRepository().Set(session.Message().Chat.ID, "yes")
-		session.QuickReply("Ok, i will send you a cat sometimes")
+		session.QuickReply("Ok, i will send you a cat sometimes", tgbotapi.ForceReply{ForceReply: true, Selective: true})
 		session.Finish()
 		return nil
 	} else {
 		session.GetConfigRepository().Set(session.Message().Chat.ID, "no")
-		session.QuickReply("Ok, i will not send you a cat sometimes")
+		session.QuickReply("Ok, i will not send you a cat sometimes", tgbotapi.ForceReply{ForceReply: true, Selective: true})
 		session.Finish()
 		return nil
 	}

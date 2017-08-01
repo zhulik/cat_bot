@@ -8,8 +8,9 @@ import (
 type CatHandler struct {
 }
 
-func (responder CatHandler) HandleCommand(margelet margelet.MargeletAPI, message *tgbotapi.Message) error {
-	margelet.Send(tgbotapi.NewChatAction(message.Chat.ID, tgbotapi.ChatUploadPhoto))
+func (handler CatHandler) HandleCommand(message margelet.Message) error {
+
+	message.Bot().Send(tgbotapi.NewChatAction(message.Message().Chat.ID, tgbotapi.ChatUploadPhoto))
 
 	bytes, err := downloadCat()
 
@@ -17,15 +18,16 @@ func (responder CatHandler) HandleCommand(margelet margelet.MargeletAPI, message
 		return err
 	}
 
-	msg := tgbotapi.NewPhotoUpload(message.Chat.ID, tgbotapi.FileBytes{"cat.jpg", bytes})
-	msg.ChatID = message.Chat.ID
-	msg.ReplyToMessageID = message.MessageID
+	msg := tgbotapi.NewPhotoUpload(message.Message().Chat.ID, tgbotapi.FileBytes{"cat.jpg", bytes})
+	msg.ChatID = message.Message().Chat.ID
+	//msg.ReplyToMessageID = message.Message().MessageID
 
-	margelet.Send(msg)
+	message.Bot().Send(msg)
+
 
 	return nil
 }
 
-func (responder CatHandler) HelpMessage() string {
+func (handler CatHandler) HelpMessage() string {
 	return "Send image with cat"
 }

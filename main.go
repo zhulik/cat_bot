@@ -15,8 +15,8 @@ func main() {
 		panic(err)
 	}
 
-	margelet.AddCommandHandler("/cat", CatHandler{})
-	margelet.AddSessionHandler("/start", ConfigSessionHandler{})
+	margelet.AddCommandHandler("cat", CatHandler{})
+	margelet.AddSessionHandler("start", ConfigSessionHandler{})
 
 	go randomCatSender(margelet)
 
